@@ -104,10 +104,22 @@ public class OrderRepository {
 
     public Integer findOrdersLeftAfterGivenTimeByPartnerId(String timeString, String partnerId){
         // your code here
+        int ct=0;
+        String[] splitTime=timeString.split(":");
+        int hh=Integer.parseInt(splitTime[0]);
+        int mm=Integer.parseInt(splitTime[1]);
+        int time= mm + (hh*60);
+        for(String order:partnerToOrderMap.get(partnerId)){
+            int t=orderMap.get(order).getDeliveryTime();
+            if(time<t)
+                ct++;
+        }
+        return ct;
     }
 
     public String findLastDeliveryTimeByPartnerId(String partnerId){
         // your code here
         // code should return string in format HH:MM
+        return "";
     }
 }
